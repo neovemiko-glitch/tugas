@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoCraft Exhibition</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* BACKGROUND GLOW */
+    body::before{
+      content:'';
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#00ffee40;
+      filter:blur(120px);
+      top:-100px;
+      left:-100px;
+      z-index:-1;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#7b2cff40;
+      filter:blur(120px);
+      bottom:-100px;
+      right:-100px;
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 8%;
+      backdrop-filter:blur(15px);
+      background:rgba(255,255,255,0.05);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      z-index:999;
+    }
+
+    nav h1{
+      color:#00ffee;
+      font-size:28px;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#00ffee;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:120px 8%;
+      gap:50px;
+    }
+
+    .hero-text{
+      flex:1;
+      animation:fadeUp 1s ease;
+    }
+
+    .hero-text h2{
+      color:#00ffee;
+      margin-bottom:10px;
+      font-size:20px;
+    }
+
+    .hero-text h1{
+      font-size:65px;
+      line-height:1.1;
+      margin-bottom:20px;
+    }
+
+    .hero-text p{
+      color:#d0d0d0;
+      margin-bottom:30px;
+      max-width:500px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 35px;
+      background:#00ffee;
+      color:black;
+      border-radius:40px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 25px #00ffee;
+    }
+
+    .hero-image{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      animation:float 4s ease-in-out infinite;
+    }
+
+    .hero-image img{
+      width:100%;
+      max-width:450px;
+      border-radius:25px;
+      border:2px solid rgba(255,255,255,0.1);
+      box-shadow:0 0 30px rgba(0,255,238,0.3);
+    }
+
+    /* SECTION */
+    section{
+      padding:100px 8%;
+    }
+
+    .title{
+      font-size:45px;
+      color:#00ffee;
+      margin-bottom:40px;
+      text-align:center;
+    }
+
+    /* GLASS EFFECT */
+    .glass{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(15px);
+      border-radius:25px;
+      padding:30px;
+    }
+
+    /* ABOUT */
+    .members{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin-top:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      padding:25px;
+      border-radius:20px;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 20px rgba(0,255,238,0.2);
+    }
+
+    .card h3{
+      margin-bottom:10px;
+      color:#00ffee;
+    }
+
+    /* GALLERY */
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .gallery img{
+      width:100%;
+      border-radius:20px;
+      transition:0.4s;
+    }
+
+    .gallery img:hover{
+      transform:scale(1.05);
+    }
+
+    /* PRODUCT */
+    .product-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .product-box{
+      padding:30px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.05);
+      transition:0.3s;
+    }
+
+    .product-box:hover{
+      transform:translateY(-10px);
+    }
+
+    .product-box h2{
+      margin-bottom:15px;
+      color:#00ffee;
+    }
+
+    /* FUN FACT */
+    .funfact{
+      text-align:center;
+    }
+
+    .counter{
+      font-size:70px;
+      margin:25px 0;
+      color:#00ffee;
+      font-weight:bold;
+    }
+
+    button{
+      padding:14px 30px;
+      border:none;
+      border-radius:40px;
+      background:#00ffee;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 20px #00ffee;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:40px;
+      text-align:center;
+      color:#999;
+    }
+
+    /* ANIMATION */
+    @keyframes float{
+      0%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-15px);
+      }
+      100%{
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+
+      .hero{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .hero-text h1{
+        font-size:45px;
+      }
+
+      nav ul{
+        display:none;
+      }
+
+/* BROSUR */
+.brochure-container{
+  text-align:center;
+}
+
+.brochure-container img{
+  width:100%;
+  max-width:700px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,255,238,0.2);
+  margin-bottom:20px;
+  transition:0.3s;
+}
+
+.brochure-container img:hover{
+  transform:scale(1.02);
+}
+
+.brochure-container p{
+  color:#cfcfcf;
+}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h1>EcoCraft</h1>
+
+    <ul>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#gallery">Galeri</a></li>
+      <li><a href="#product">Produk</a></li>
+      <li><a href="#funfact">Fun Fact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-text">
+      <h2>Website Pameran Kelompok</h2>
+
+      <h1>
+        EcoCraft — Mengubah Limbah Menjadi Karya
+      </h1>
+
+      <p>
+        Proyek kreatif yang mengubah barang bekas menjadi karya unik,
+        bermanfaat, dan bernilai estetika tinggi.
+      </p>
+
+      <a href="#about" class="btn">Jelajahi Proyek</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop">
+    </div>
+<!-- BROSUR -->
+<section id="brochure">
+
+  <h1 class="title">Brosur Pameran</h1>
+
+  <div class="glass brochure-container">
+
+    <img 
+      src="pale.jpg"
+      alt="Brosur EcoCraft"
+    >
+
+    <p>
+      Brosur ini berisi ringkasan proyek, tujuan, dan informasi kelompok kami.
+    </p>
+
+  </div>
+
+</section>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <h1 class="title">Tentang Kelompok</h1>
+
+    <div class="glass">
+
+      <p>
+        Kelompok kami membuat proyek daur ulang kreatif untuk meningkatkan
+        kesadaran lingkungan melalui karya inovatif.
+      </p>
+
+      <div class="members">
+
+        <div class="card">
+          <h3>Fradil</h3>
+          <p>Frontend Developer</p>
+        </div>
+
+        <div class="card">
+          <h3>Husni</h3>
+          <p>Backend Developer</p>
+        </div>
+
+        <div class="card">
+          <h3>Andika</h3>
+          <p>UI Designer</p>
+        </div>
+
+        <div class="card">
+          <h3>Rahmat</h3>
+          <p>Quality Tester</p>
+        </div>
+        
+  <div class="card">
+    <h3>Fradil</h3>
+    <p>Frontend Developer</p>
+  </div>
+
+  <div class="card">
+    <h3>Husni</h3>
+    <p>Backend Developer</p>
+  </div>
+
+  <div class="card">
+    <h3>Andika</h3>
+    <p>UI Designer</p>
+  </div>
+
+  <div class="card">
+    <h3>Rahmat</h3>
+    <p>Quality Tester</p>
+  </div>
+
+  <div class="card">
+    <h3>Fikri</h3>
+    <p>Content Writer</p>
+  </div>
+
+  <div class="card">
+    <h3>Rizky</h3>
+    <p>Project Manager</p>
+  </div>
+
+</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+
+    <h1 class="title">Galeri Karya</h1>
+
+    <div class="gallery">
+
+      <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1200&auto=format&fit=crop">
+
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop">
+
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+      <img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+  </section>
+
+  <!-- PRODUCT -->
+  <section id="product">
+
+    <h1 class="title">Penjelasan Produk</h1>
+
+    <div class="product-container">
+
+      <div class="product-box">
+        <h2>Bahan</h2>
+
+        <p>
+          Botol plastik, kardus bekas, cat ramah lingkungan,
+          dan bahan daur ulang lainnya.
+        </p>
+      </div>
+
+      <div class="product-box">
+        <h2>Cara Pembuatan</h2>
+
+        <p>
+          Limbah dibersihkan, dibentuk ulang,
+          lalu dihias menjadi produk kreatif.
+        </p>
+      </div>
+
+      <div class="product-box">
+        <h2>Manfaat</h2>
+
+        <p>
+          Mengurangi sampah sekaligus meningkatkan kreativitas
+          generasi muda.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FUN FACT -->
+  <section id="funfact">
+
+    <h1 class="title">Fun Fact</h1>
+
+    <div class="glass funfact">
+
+      <h2>Total Barang Yang Berhasil Didaur Ulang</h2>
+
+      <div class="counter" id="counter">
+        0
+      </div>
+
+      <button onclick="tambah()">
+        Tambah Jumlah
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 EcoCraft Exhibition Website
+  </footer>
+
+  <script>
+
+    let count = 0;
+
+    function tambah(){
+      count++;
+      document.getElementById("counter").innerHTML = count;
+    }
+
+  </script>
+<!-- QR CODE SECTION -->
+<section id="qr">
+
+  <h1 class="title">Scan QR Website</h1>
+
+  <div class="glass qr-container">
+
+    <img 
+      src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://neovemiko-glitch.github.io/Kelompok-delapan/TUGAS%20IPAS%20KELOMPOK%208.html"
+      alt="QR Code Website"
+    >
+
+    <p>
+      Scan QR Code untuk membuka website pameran kami
+    </p>
+
+  </div>
+
+</section>
+
+</body>
+</html>
